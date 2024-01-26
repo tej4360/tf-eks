@@ -4,7 +4,7 @@ resource "aws_eks_cluster" "eks" {
   version  = var.eks_version
 
   vpc_config {
-    subnet_ids = var.PRIVATE_SUBNET_IDS
+    subnet_ids = "subnet-07db8fc706f7f5c1a"
   }
 
   # Ensure that IAM Role permissions are created before and deleted after EKS Cluster handling.
@@ -19,7 +19,7 @@ resource "aws_eks_node_group" "node-group" {
   cluster_name    = aws_eks_cluster.eks.name
   node_group_name = "tf-nodes-spot"
   node_role_arn   = aws_iam_role.eks-node-role.arn
-  subnet_ids      = var.PRIVATE_SUBNET_IDS
+  subnet_ids      = "subnet-07db8fc706f7f5c1a"
   capacity_type   = "SPOT"
   instance_types  = ["t3.xlarge"]
 
